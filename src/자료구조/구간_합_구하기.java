@@ -9,21 +9,37 @@ public class 구간_합_구하기 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
+        StringBuilder sb = new StringBuilder();
         int[] sum;
 
         st = new StringTokenizer(br.readLine());
         int numOfData = Integer.parseInt(st.nextToken());
-        sum = new int[numOfData];
+        sum = new int[numOfData + 1];
         int numOfCase = Integer.parseInt(st.nextToken());
 
         st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < numOfData; i++) {
+        for (int i = 1; i <= numOfData; i++) {
             if (i == 0) {
                 sum[i] = 0;
+            } else {
+                sum[i] = sum[i-1] + Integer.parseInt(st.nextToken());
             }
-
-            sum[i] = sum[i-1] +
         }
+
+        int begin;
+        int end;
+        for (int i = 0; i < numOfCase; i++) {
+            st = new StringTokenizer(br.readLine());
+            begin = Integer.parseInt(st.nextToken());
+            end = Integer.parseInt(st.nextToken());
+            sb.append(getSum(sum, begin, end)).append("\n");
+        }
+
+        System.out.print(sb);
+    }
+
+    public static int getSum(int[] sum, int begin, int end) {
+        return sum[end] - sum[begin-1];
     }
 }
 
