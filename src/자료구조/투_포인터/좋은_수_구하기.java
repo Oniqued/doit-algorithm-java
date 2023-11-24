@@ -20,20 +20,24 @@ public class 좋은_수_구하기 {
         }
 
         Arrays.sort(arr);
-        for (int cursor = 0; cursor < arr.length; cursor++) {
+        for (int cursor = 0; cursor < numOfData; cursor++) {
             int i = 0;
-            int j = cursor - 1;
-            if (cursor == 0 || cursor == 1) {
-                continue;
-            }
+            int j = numOfData - 1;
+            int find = arr[cursor];
+
             while (i < j) {
-                if (arr[i] + arr[j] < arr[cursor]) {
+                if (arr[i] + arr[j] == find) {
+                    if (i != cursor && j != cursor) {
+                        count++;
+                        break;
+                    } else if (i == cursor) {
+                        i++;
+                    } else if (j == cursor) {
+                        j--;
+                    }
+                } else if (arr[i] + arr[j] < find) {
                     i++;
-                } else if (arr[i] + arr[j] > arr[cursor]) {
-                    j--;
                 } else {
-                    count++;
-                    i++;
                     j--;
                 }
             }
@@ -60,19 +64,12 @@ public class 좋은_수_구하기 {
 *   }
 *   arr[] 정렬;
 *   for (int cursor = 0; cursor < arr.length; cursor++) {
-*       int i = 0;
-*       int j = cursor - 1;
-*       if (cursor == 0 || cursor == 1) {
-*           continue;
-*       }
+*       찾고자 하는 값, i, j를 초기화;
 *       while (i < j) {
-*           if (arr[i]와 arr[j]를 더했을 때, arr[cursor]보다 작으면) {
-*               i++;
-*           } else if (arr[i]와 arr[j]를 더했을 때, arr[cursor]보다 크면) {
-*               j--;
-*           } else {
-*               count++;
-*           }
+*           if (arr[i] + arr[j] == 찾고자 하는 값)
+*               count++ 후, while 문 종료
+*           else if (arr[i] + arr[j] < 찾고자 하는 값) i++;
+*           else j--;
 *       }
 *   }
 *   출력(count);
