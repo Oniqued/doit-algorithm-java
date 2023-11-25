@@ -3,6 +3,9 @@ package 자료구조.배열과_리스트;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.Collections;
 import java.util.StringTokenizer;
 
 public class 평균_구하기 {
@@ -20,7 +23,10 @@ public class 평균_구하기 {
             }
             sum += score;
         }
+
         System.out.println(calculate(sum, maxScore, numOfSubject));
+
+        br.close();
     }
 
     public static float calculate(int sum, int maxScore, int numOfSubject) {
