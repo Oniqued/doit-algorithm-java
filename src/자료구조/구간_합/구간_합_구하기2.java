@@ -39,7 +39,6 @@ public class 구간_합_구하기2 {
             int result = prefixSum(fromX, fromY, toX, toY);
             sb.append(result).append("\n");
         }
-
         System.out.print(sb);
     }
 
