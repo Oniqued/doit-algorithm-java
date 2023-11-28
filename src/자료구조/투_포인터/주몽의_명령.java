@@ -37,6 +37,7 @@ public class 주몽의_명령 {
             }
         }
         System.out.println(fitCount);
+        br.close();
     }
 
     public static int toInt(String s) {
