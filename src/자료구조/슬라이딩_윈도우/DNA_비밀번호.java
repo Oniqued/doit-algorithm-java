@@ -45,6 +45,7 @@ public class DNA_비밀번호 {
         }
 
         System.out.println(passwordCase);
+        br.close();
     }
 
     public static int toInt(String s) {
