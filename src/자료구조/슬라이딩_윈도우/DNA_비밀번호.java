@@ -8,15 +8,12 @@ import java.util.Deque;
 import java.util.StringTokenizer;
 
 public class DNA_비밀번호 {
-    private static int[] passwordChecker;
-    private static int[] passwordRule;
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
         int passwordCase = 0;
-        passwordChecker = new int[4];
-        passwordRule = new int[4];
+        int[] passwordChecker = new int[4];
+        int[] passwordRule = new int[4];
 
         st = new StringTokenizer(br.readLine());
         int dnaSize = toInt(st.nextToken());
@@ -32,15 +29,19 @@ public class DNA_비밀번호 {
 
         for (int i = 0; i < windowSize; i++) {
             char ch = dnaChar[i];
-            countChar(ch);
-            window.addLast(ch);
+            addChar(window, passwordChecker, ch);
         }
 
-        for (int i = windowSize - 1; i < dnaChar.length; i++) {
-            if (isCorrect()) passwordCase++;
-            removeChar(window.pollFirst());
-            countChar(dnaChar[i]);
-            window.addLast(dnaChar[i]);
+        if (isCorrectPassword(passwordChecker, passwordRule)) {
+            passwordCase++;
+        }
+
+        for (int i = windowSize; i < dnaChar.length; i++) {
+            removeChar(passwordChecker, window.pollFirst());
+            addChar(window, passwordChecker, dnaChar[i]);
+            if (isCorrectPassword(passwordChecker, passwordRule)) {
+                passwordCase++;
+            }
         }
 
         System.out.println(passwordCase);
@@ -50,7 +51,7 @@ public class DNA_비밀번호 {
         return Integer.parseInt(s);
     }
 
-    public static void countChar(char ch) {
+    public static void countChar(int[] passwordChecker, char ch) {
         if (ch == 'A') {
             passwordChecker[0]++;
         } else if (ch == 'C') {
@@ -62,7 +63,12 @@ public class DNA_비밀번호 {
         }
     }
 
-    public static void removeChar(char ch) {
+    public static void addChar(Deque<Character> window, int[] passwordChecker, char ch) {
+        window.addLast(ch);
+        countChar(passwordChecker, ch);
+    }
+
+    public static void removeChar(int[] passwordChecker, char ch) {
         if (ch == 'A') {
             passwordChecker[0]--;
         } else if (ch == 'C') {
@@ -74,7 +80,7 @@ public class DNA_비밀번호 {
         }
     }
 
-    public static boolean isCorrect() {
+    public static boolean isCorrectPassword(int[] passwordChecker, int[] passwordRule) {
         for (int i = 0; i < 4; i++) {
             if (passwordChecker[i] < passwordRule[i]) {
                 return false;
