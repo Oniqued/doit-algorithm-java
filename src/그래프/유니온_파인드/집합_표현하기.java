@@ -37,11 +37,11 @@ public class 집합_표현하기 {
     }
 
     public static void union(int[] parent, int x, int y) {
-        x = findParent(parent, x);
-        y = findParent(parent, y);
+        int x_ = findParent(parent, x);
+        int y_ = findParent(parent, y);
 
-        if (x != y) {
-            parent[y] = x;
+        if (x_ != y_) {
+            parent[y_] = x_;
         }
     }
 
