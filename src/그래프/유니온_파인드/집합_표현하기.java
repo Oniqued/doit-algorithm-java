@@ -69,6 +69,7 @@ public class 집합_표현하기 {
     }
 }
 
+
 /*
 [의사 코드]
 numOfData 입력;
