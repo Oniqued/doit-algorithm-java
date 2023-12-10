@@ -1,4 +1,4 @@
-package 탐색.깊이_우선_탐색;
+package 탐색.너비_우선_탐색;
 
 import java.io.BufferedReader;
 import java.io.IOException;
