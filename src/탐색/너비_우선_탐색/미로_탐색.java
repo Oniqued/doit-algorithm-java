@@ -1,11 +1,11 @@
 package 탐색.너비_우선_탐색;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class 미로_탐색 {
@@ -15,7 +15,6 @@ public class 미로_탐색 {
     private static int height;
     private static int width;
     private static boolean[][] visited;
-    private static int movement = 0;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -40,18 +39,21 @@ public class 미로_탐색 {
     }
 
     public static void findPath(int x, int y) {
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(new int[]{x, y});
+        Queue<Point> queue = new LinkedList<>();
+        queue.add(new Point(x, y));
         visited[x][y] = true;
         while (!queue.isEmpty()) {
-            int[] currentPosition = queue.remove();
+            Point currentPoint = queue.remove();
+            if (isFinish(currentPoint.x, currentPoint.y)) {
+                return;
+            }
             for (int i = 0; i < 4; i++) {
-                int nextX = currentPosition[0] + moveX[i];
-                int nextY = currentPosition[1] + moveY[i];
+                int nextX = currentPoint.x + moveX[i];
+                int nextY = currentPoint.y + moveY[i];
                 if (canMoveTo(nextX, nextY)) {
                     visited[nextX][nextY] = true;
-                    maze[nextX][nextY] = maze[currentPosition[0]][currentPosition[1]] + 1;
-                    queue.add(new int[]{nextX, nextY});
+                    queue.add(new Point(nextX, nextY));
+                    maze[nextX][nextY] = maze[currentPoint.x][currentPoint.y] + 1;
                 }
             }
         }
