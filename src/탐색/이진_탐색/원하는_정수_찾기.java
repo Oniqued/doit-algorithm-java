@@ -25,14 +25,16 @@ public class 원하는_정수_찾기 {
 
         int numOfQuery = toInt(br.readLine());
         st = new StringTokenizer(br.readLine());
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < numOfQuery; i++) {
             int targetNumber = toInt(st.nextToken());
-            if (Arrays.binarySearch(data, targetNumber) >= 0) {
-                System.out.println(1);
+            if (hasNumber(targetNumber)) {
+                sb.append(1).append("\n");
             } else {
-                System.out.println(0);
+                sb.append(0).append("\n");
             }
         }
+        System.out.print(sb);
     }
 
     public static boolean hasNumber(int targetNumber) {
