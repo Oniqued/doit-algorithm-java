@@ -27,8 +27,7 @@ public class 원하는_정수_찾기 {
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < numOfQuery; i++) {
             int targetNumber = toInt(st.nextToken());
-
-            if (hasNumber(targetNumber)) {
+            if (Arrays.binarySearch(data, targetNumber) >= 0) {
                 System.out.println(1);
             } else {
                 System.out.println(0);
